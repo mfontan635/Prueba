@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generador de Menús de Verano</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 p-6">
+    <div class="max-w-4xl mx-auto bg-white p-6 rounded-lg shadow-md">
+        <h1 class="text-2xl font-bold text-center mb-4">Generador de Menús de Verano</h1>
+        <button onclick="generarMenuDiario()" class="bg-blue-500 text-white p-2 mt-2 rounded w-full">Generar Menú Diario</button>
+        <div id="menu-diario" class="mt-4 p-4 border rounded bg-gray-200"></div>
+    </div>
+
+    <script>
+        const menus = [
+            "Ensalada de lentejas con tomate y pimientos + merluza al horno con espinacas + manzana",
+            "Garbanzos salteados con calabacín y zanahoria + pollo a la plancha con arroz integral + melocotón",
+            "Ensalada de quinoa con pimientos y judías verdes + atún al horno con patata + fresas",
+            "Revuelto de judías con cebolla y ajo + solomillo de cerdo con pisto + cerezas",
+            "Espaguetis de calabacín con alubias y tomate + dorada al horno con zanahoria + sandía",
+            "Arroz integral con verduras y garbanzos + salmón al horno con brócoli + ciruelas",
+            "Berenjena rellena de lentejas con pimientos + pollo al curry con arroz + pera"
+        ];
+
+        function generarMenuDiario() {
+            const menuSeleccionado = menus[Math.floor(Math.random() * menus.length)];
+            document.getElementById('menu-diario').innerHTML = `<p><strong>Menú del día:</strong> ${menuSeleccionado}</p>`;
+            localStorage.setItem('menuDiario', menuSeleccionado);
+        }
+
+        window.onload = function() {
+            const menuGuardado = localStorage.getItem('menuDiario');
+            if (menuGuardado) {
+                document.getElementById('menu-diario').innerHTML = `<p><strong>Menú del día:</strong> ${menuGuardado}</p>`;
+            }
+        };
+    </script>
+</body>
+</html>
