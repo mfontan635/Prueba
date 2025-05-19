@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generador de Menús de Verano</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 p-6">
+    <div class="max-w-3xl mx-auto bg-white p-6 rounded-lg shadow-md">
+        <h1 class="text-2xl font-bold text-center mb-4">Generador de Menús de Verano</h1>
+        <div id="menu-form" class="mb-6">
+            <input id="menu-input" type="text" placeholder="Escribe el menú..." class="border p-2 w-full">
+            <button onclick="agregarMenu()" class="bg-blue-500 text-white p-2 mt-2 rounded">Añadir Menú</button>
+        </div>
+        <div id="menu-list" class="space-y-2"></div>
+    </div>
+
+    <script>
+        let menus = [];
+
+        function agregarMenu() {
+            const input = document.getElementById('menu-input');
+            const menu = input.value.trim();
+            if (menu) {
+                menus.push(menu);
+                actualizarLista();
+                input.value = "";
+            }
+        }
+
+        function eliminarMenu(index) {
+            menus.splice(index, 1);
+            actualizarLista();
+        }
+
+        function actualizarLista() {
+            const lista = document.getElementById('menu-list');
+            lista.innerHTML = "";
+            menus.forEach((menu, index) => {
+                lista.innerHTML += `
+                    <div class="border p-2 flex justify-between">
+                        <span>${menu}</span>
+                        <button onclick="eliminarMenu(${index})" class="bg-red-500 text-white p-1 rounded">Eliminar</button>
+                    </div>
+                `;
+            });
+        }
+    </script>
+</body>
+</html>
